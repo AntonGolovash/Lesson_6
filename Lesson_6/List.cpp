@@ -35,13 +35,22 @@ void List<T>::Add(T data)
 template<class T>
 void List<T>::Clear()
 {
-
+	while (_head != nullptr)
+	{
+		Node<T>* tmp = _head;
+		_head = _head->next;
+		delete tmp;
+		_size--;
+	}
+	_size = 0;
+	_head = _tail = nullptr;
+	cerr << "The list is empty\t" << "elements in the list\t";
 }
 
 template<class T>
 int List<T>::Getsize()
 {
-	return 0;
+	return _size;
 }
 
 template<class T>
@@ -56,7 +65,7 @@ Node<T>& List<T>::GetHead()
 template<class T>
 Node<T>& List<T>::GetTail()
 {
-	
+	return *(_tail);
 }
 
 template<class T>
@@ -69,7 +78,7 @@ inline void List<T>::Insert(T data, int index)
 	Node<T>* newNode = new Node<T>;
 	newNode->data = data;
 
-	Node<T>* previous = _head;
+	Node<T>* previous = nullptr;
 	Node<T>* next = _head;
 
 	while (index-- != 0)
@@ -83,8 +92,11 @@ inline void List<T>::Insert(T data, int index)
 }
 
 template<class T>
-inline void List<T>::Replace(T data, int Index)
+inline void List<T>::Replace(T data, int index)
 {
+	if (_size <= index || index < 0)
+		throw std::bad_alloc();
+	this[index] = data;
 }
 
 template<class T>
@@ -95,7 +107,18 @@ inline void List<T>::Delete(int index)
 template<class T>
 inline T List<T>::operator[](int index)
 {
-	return T();
+	if (_size <= index || index < 0)
+	{
+		throw std::bad_alloc();
+	}
+	Node<T>* target = _head;
+
+	while (index-- != 0)
+	{
+		target = target->next;
+	}
+
+	return target->data;
 }
 
 template<class T>

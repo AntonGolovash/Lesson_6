@@ -16,7 +16,7 @@ public:
 	Node<T>& GetHead();
 	Node<T>& GetTail();
 	void Insert(T data, int index);
-	void Replace(T data, int Index);
+	void Replace(T data, int index);
 	void Delete(int index);
 	T operator[] (int index);
 	void DeleteFirst();

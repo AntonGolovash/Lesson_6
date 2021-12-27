@@ -31,5 +31,7 @@ int main()
 		cout << tmpNode->data << "\t";
 		tmpNode = tmpNode->next;
 	}
+	cout << endl;
+	cout << list[2] << endl;
 
 }
