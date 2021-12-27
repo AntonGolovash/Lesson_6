@@ -102,6 +102,30 @@ inline void List<T>::Replace(T data, int index)
 template<class T>
 inline void List<T>::Delete(int index)
 {
+	if (index == 0)
+	{
+		DeleteFirst();
+		return;
+	}
+
+	if (_size <= index || index < 0)
+		throw std::bad_alloc();
+	Node<T>* previous = nullptr;
+	Node<T>* target = _head;
+	Node<T>* next = nullptr;
+
+	if (index > 0)
+	{
+		for (int i = 0; i != index; i++)
+		{
+			previous = target;
+			target = target->next;
+		}
+		next = target->next;
+		delete target;
+		previous->next = next;
+		_size--;
+	}
 }
 
 template<class T>
@@ -124,4 +148,12 @@ inline T List<T>::operator[](int index)
 template<class T>
 inline void List<T>::DeleteFirst()
 {
+	if (_head != nullptr)
+	{
+		Node<T>* previous = _head;
+		_head = _head->next;
+		delete previous;
+		_size--;
+	}
+	cout << "Head = nullptr" << endl;
 }

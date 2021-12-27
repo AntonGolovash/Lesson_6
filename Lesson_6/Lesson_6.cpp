@@ -34,4 +34,9 @@ int main()
 	cout << endl;
 	cout << list[2] << endl;
 
+	list.Delete(2);
+
+	cout << endl;
+	cout << list[2] << endl;
+
 }
