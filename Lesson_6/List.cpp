@@ -62,6 +62,24 @@ Node<T>& List<T>::GetTail()
 template<class T>
 inline void List<T>::Insert(T data, int index)
 {
+	if (_size <= index || index < 0)
+	{
+		throw std::bad_alloc();
+	}
+	Node<T>* newNode = new Node<T>;
+	newNode->data = data;
+
+	Node<T>* previous = _head;
+	Node<T>* next = _head;
+
+	while (index-- != 0)
+	{
+		previous = next;
+		next = next->next;
+	}
+	previous->next = newNode;
+	newNode->next = next;
+	++_size;
 }
 
 template<class T>
